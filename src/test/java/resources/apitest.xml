@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="API Test Suite Regression">
+    <listeners>
+        <listener class-name="io.backend.api.listeners.ApiListeners"/>
+        <listener class-name="io.backend.api.listeners.ApiAnnotationTransformer"/>
+    </listeners>
+    <test name="API Service tests">
+        <classes>
+            <class name="io.backend.api.zippo.tests.PostalCodeTest"/>
+            <class name="io.backend.api.employee.tests.EmployeeTest"/>
+            <class name="io.backend.api.reqres.tests.ReqresTest"/>
+        </classes>
+    </test>
+</suite>
