@@ -23,4 +23,9 @@ public class ApiClients extends ResponseHandlers {
         String createUserEndPoint = ApiEndPoints.POST_CREATE_USER;
         return postApiResponse(request, createUserEndPoint);
     }
+
+    public Response getRickAndMortyCharacterResponse(int characterId) {
+        String rickAndMortyCharacterEndPoint = ApiEndPoints.RICK_AND_MORTY_CHARACTER + characterId;
+        return getApiResponse(rickAndMortyCharacterEndPoint);
+    }
 }

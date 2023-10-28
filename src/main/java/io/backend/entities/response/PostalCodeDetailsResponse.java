@@ -9,11 +9,11 @@ import lombok.Getter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PostalCodeDetailsResponse {
 
-	@JsonProperty("post code")
-	String postCode;
-	String country;
-	@JsonProperty("country abbreviation")
-	String countryAbbreviation;
+    @JsonProperty("post code")
+    String postCode;
+    String country;
+    @JsonProperty("country abbreviation")
+    String countryAbbreviation;
 
 	@Getter
 	@JsonIgnoreProperties(ignoreUnknown = true)

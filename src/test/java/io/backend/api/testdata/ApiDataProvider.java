@@ -22,4 +22,16 @@ public class ApiDataProvider {
                 {"morpheus", "leader"}
         };
     }
+
+    @DataProvider(name = "rick-and-morty-characters")
+    private Object[][] rickAndMortyCharacters() {
+        return new Object[][]{
+                {50, "Blim Blam", "Alive", "unknown"},
+                {290, "Rick Sanchez", "Dead", "Earth (Evil Rick's Target Dimension)"},
+                {303, "Samantha", "Alive", "Earth (C-137)"},
+                {473, "Bartender Morty", "Alive", "unknown"},
+                {572, "Robot Snake", "unknown", "Snake Planet"},
+                {653, "Plane Crash Survivor", "unknown", "Near-Duplicate Reality"}
+        };
+    }
 }
