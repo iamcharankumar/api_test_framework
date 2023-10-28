@@ -5,6 +5,7 @@ import io.backend.entities.request.CreateUsersRequest;
 import io.backend.entities.response.CreateEmployeeResponse;
 import io.backend.entities.response.CreateUserResponse;
 import io.backend.entities.response.PostalCodeDetailsResponse;
+import io.backend.entities.response.RickAndMortyResponse;
 import io.restassured.response.Response;
 import lombok.SneakyThrows;
 
@@ -38,5 +39,14 @@ public class ApiControllers extends ApiClients {
             return Collections.singletonMap(createUserResponse, deserialize(createUserResponse, CreateUserResponse.class));
         else
             throw new Exception("CREATE USER API FAILED!");
+    }
+
+    @SneakyThrows
+    public Map<Response, RickAndMortyResponse> getRickAndMortyResponse(int characterId) {
+        Response rickAndMortyCharacterResponse = getRickAndMortyCharacterResponse(characterId);
+        if (rickAndMortyCharacterResponse != null)
+            return Collections.singletonMap(rickAndMortyCharacterResponse, deserialize(rickAndMortyCharacterResponse, RickAndMortyResponse.class));
+        else
+            throw new Exception("RICK AND MORTY CHARACTER API FAILED!");
     }
 }

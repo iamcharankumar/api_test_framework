@@ -11,6 +11,7 @@
             <class name="io.backend.api.zippo.tests.PostalCodeTest"/>
             <class name="io.backend.api.employee.tests.EmployeeTest"/>
             <class name="io.backend.api.reqres.tests.ReqresTest"/>
+            <class name="io.backend.api.rickandmorty.tests.RickAndMortyCharacterTest"/>
         </classes>
     </test>
 </suite>

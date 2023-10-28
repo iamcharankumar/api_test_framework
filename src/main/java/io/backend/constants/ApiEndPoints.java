@@ -22,7 +22,12 @@ public final class ApiEndPoints {
         return API_PROPERTIES.getProperty(API_PROPERTY_FILE, "REQRES_HOST");
     }
 
+    private static String getRickAndMortyHost() {
+        return API_PROPERTIES.getProperty(API_PROPERTY_FILE, "RICK_AND_MORTY_HOST");
+    }
+
     public static final String GET_POSTAL_CODE_INFO = getZipposHost();
     public static final String POST_CREATE_EMPLOYEE = getDummyHost() + "/api/v1/create";
     public static final String POST_CREATE_USER = getReqresHost() + "/api/users";
+    public static final String RICK_AND_MORTY_CHARACTER = getRickAndMortyHost() + "/api/character/";
 }
