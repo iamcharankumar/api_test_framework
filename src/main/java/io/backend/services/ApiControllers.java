@@ -1,8 +1,6 @@
 package io.backend.services;
 
-import io.backend.entities.request.CreateEmployeeRequest;
 import io.backend.entities.request.CreateUsersRequest;
-import io.backend.entities.response.CreateEmployeeResponse;
 import io.backend.entities.response.CreateUserResponse;
 import io.backend.entities.response.PostalCodeDetailsResponse;
 import io.backend.entities.response.RickAndMortyResponse;
@@ -21,15 +19,6 @@ public class ApiControllers extends ApiClients {
             return Collections.singletonMap(postalCodeResponse, deserialize(postalCodeResponse, PostalCodeDetailsResponse.class));
         else
             throw new Exception("POSTAL CODE DETAILS API FAILED!");
-    }
-
-    @SneakyThrows
-    public Map<Response, CreateEmployeeResponse> getCreateEmployeeResponse(CreateEmployeeRequest createEmployeeRequest) {
-        Response createEmployeeResponse = createEmployeeResponse(createEmployeeRequest);
-        if (createEmployeeResponse != null)
-            return Collections.singletonMap(createEmployeeResponse, deserialize(createEmployeeResponse, CreateEmployeeResponse.class));
-        else
-            throw new Exception("CREATE EMPLOYEE API FAILED!");
     }
 
     @SneakyThrows

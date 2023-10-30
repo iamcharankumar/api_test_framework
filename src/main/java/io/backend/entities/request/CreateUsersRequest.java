@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateUsersRequest {
-    String name;
-    String job;
+    private String name;
+    private String job;
 }
