@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateUserResponse {
-    String id;
-    String createdAt;
+    private String id;
+    private String createdAt;
 }
