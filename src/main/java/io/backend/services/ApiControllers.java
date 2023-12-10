@@ -1,41 +1,49 @@
 package io.backend.services;
 
+import io.backend.commons.HttpStatuses;
 import io.backend.entities.request.CreateUsersRequest;
 import io.backend.entities.response.CreateUserResponse;
 import io.backend.entities.response.PostalCodeDetailsResponse;
 import io.backend.entities.response.RickAndMortyResponse;
+import io.backend.utils.RetryUtils;
 import io.restassured.response.Response;
-import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import net.jodah.failsafe.Failsafe;
 
-import java.util.Collections;
-import java.util.Map;
+@Slf4j
+public class ApiControllers {
 
-public class ApiControllers extends ApiClients {
+    ApiClients apiClients;
 
-    @SneakyThrows
-    public Map<Response, PostalCodeDetailsResponse> getPostalCodeDetailsResponse(String country, String pinCode) {
-        Response postalCodeResponse = getPostalCodeResponse(country, pinCode);
-        if (postalCodeResponse != null)
-            return Collections.singletonMap(postalCodeResponse, deserialize(postalCodeResponse, PostalCodeDetailsResponse.class));
-        else
-            throw new Exception("POSTAL CODE DETAILS API FAILED!");
+    public ApiControllers() {
+        this.apiClients = new ApiClients();
     }
 
-    @SneakyThrows
-    public Map<Response, CreateUserResponse> getCreateUserResponse(CreateUsersRequest createUsersRequest) {
-        Response createUserResponse = createUserResponse(createUsersRequest);
-        if (createUserResponse != null)
-            return Collections.singletonMap(createUserResponse, deserialize(createUserResponse, CreateUserResponse.class));
-        else
-            throw new Exception("CREATE USER API FAILED!");
+    public PostalCodeDetailsResponse getPostalCodeDetailsResponse(String country, String pinCode) {
+        return Failsafe.with(new RetryUtils().getRetryPolicyForZipposTestException(2, 3)).get(() -> {
+            Response zipposPostalCodeResponse = apiClients.getPostalCodeResponse(country, pinCode);
+            if (zipposPostalCodeResponse.getStatusCode() != HttpStatuses.OK.getCode())
+                log.error("Retrying for the Zippos Postal Code. Please stay with us...");
+            return apiClients.deserialize(zipposPostalCodeResponse, PostalCodeDetailsResponse.class);
+        });
     }
 
-    @SneakyThrows
-    public Map<Response, RickAndMortyResponse> getRickAndMortyResponse(int characterId) {
-        Response rickAndMortyCharacterResponse = getRickAndMortyCharacterResponse(characterId);
-        if (rickAndMortyCharacterResponse != null)
-            return Collections.singletonMap(rickAndMortyCharacterResponse, deserialize(rickAndMortyCharacterResponse, RickAndMortyResponse.class));
-        else
-            throw new Exception("RICK AND MORTY CHARACTER API FAILED!");
+    public CreateUserResponse getCreateUserResponse(CreateUsersRequest createUsersRequest) {
+        return Failsafe.with(new RetryUtils().getRetryPolicyForReqresTestException(2, 3)).get(() -> {
+            Response createUserResponse = apiClients.createUserResponse(createUsersRequest);
+            if (createUserResponse.getStatusCode() != HttpStatuses.OK.getCode())
+                log.error("Retrying for the Reqres Create User. Please stay with us...");
+            return apiClients.deserialize(createUserResponse, CreateUserResponse.class);
+        });
+    }
+
+
+    public RickAndMortyResponse getRickAndMortyResponse(int characterId) {
+        return Failsafe.with(new RetryUtils().getRetryPolicyForRickAndMortyTestException(2, 3)).get(() -> {
+            Response rickAndMortyCharacterResponse = apiClients.getRickAndMortyCharacterResponse(characterId);
+            if (rickAndMortyCharacterResponse.getStatusCode() != HttpStatuses.OK.getCode())
+                log.error("Retrying for the Rick And Morty Character. Please stay with us...");
+            return apiClients.deserialize(rickAndMortyCharacterResponse, RickAndMortyResponse.class);
+        });
     }
 }

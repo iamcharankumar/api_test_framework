@@ -4,26 +4,26 @@ import org.testng.annotations.DataProvider;
 
 public class ApiDataProvider {
 
-    @DataProvider(name = "postal-codes")
+    @DataProvider(name = "postal-codes", parallel = true)
     private Object[][] postalCodes() {
         return new Object[][]{{"us", "90210"}};
     }
 
-    @DataProvider(name = "create-employee")
+    @DataProvider(name = "create-employee", parallel = true)
     private Object[][] createEmployee() {
         return new Object[][]{
                 {"test", "123", "23"}
         };
     }
 
-    @DataProvider(name = "create-user")
+    @DataProvider(name = "create-user", parallel = true)
     private Object[][] createUser() {
         return new Object[][]{
                 {"morpheus", "leader"}
         };
     }
 
-    @DataProvider(name = "rick-and-morty-characters")
+    @DataProvider(name = "rick-and-morty-characters", parallel = true)
     private Object[][] rickAndMortyCharacters() {
         return new Object[][]{
                 {50, "Blim Blam", "Alive", "unknown"},

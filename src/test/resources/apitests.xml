@@ -4,7 +4,6 @@
 <suite name="API Test Suite Regression">
     <listeners>
         <listener class-name="io.backend.api.listeners.ApiListeners"/>
-        <listener class-name="io.backend.api.listeners.ApiAnnotationTransformer"/>
     </listeners>
     <test name="API Service tests">
         <classes>
