@@ -10,6 +10,7 @@
             <class name="io.backend.api.zippo.tests.PostalCodeTest"/>
             <class name="io.backend.api.reqres.tests.ReqresTest"/>
             <class name="io.backend.api.rickandmorty.tests.RickAndMortyCharacterTest"/>
+            <class name="io.backend.api.ifsc.tests.IfscCodeTest"/>
         </classes>
     </test>
 </suite>

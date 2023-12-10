@@ -1,5 +1,6 @@
 package io.backend.utils;
 
+import io.backend.exceptions.IFSCCodeTestException;
 import io.backend.exceptions.ReqresTestException;
 import io.backend.exceptions.RickAndMortyTestException;
 import io.backend.exceptions.ZipposTestException;
@@ -35,5 +36,9 @@ public class RetryUtils {
 
     public RetryPolicy<Object> getRetryPolicyForRickAndMortyTestException(int delayInSeconds, int maxRetries) {
         return getDefaultRetryPolicy(delayInSeconds, maxRetries).handle(RickAndMortyTestException.class);
+    }
+
+    public RetryPolicy<Object> getRetryPolicyForIfscCodeTestException(int delayInSeconds, int maxRetries) {
+        return getDefaultRetryPolicy(delayInSeconds, maxRetries).handle(IFSCCodeTestException.class);
     }
 }

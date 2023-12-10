@@ -1,6 +1,7 @@
 package io.backend.utils;
 
 import io.backend.constants.ApiConstants;
+import io.backend.exceptions.IFSCCodeTestException;
 import io.backend.exceptions.ReqresTestException;
 import io.backend.exceptions.RickAndMortyTestException;
 import io.backend.exceptions.ZipposTestException;
@@ -46,5 +47,13 @@ public class ConfigLoader {
         if (rickAndMortyHost != null)
             return rickAndMortyHost;
         else throw new RickAndMortyTestException("Rick And Morty Host failed to load from the properties file!");
+    }
+
+    public String getIfscCodeHost() {
+        String ifscCodeHost = PROPERTIES.getProperty("IFSC_CODE_HOST");
+        if (ifscCodeHost != null)
+            return ifscCodeHost;
+        else
+            throw new IFSCCodeTestException("IFSC Code Host failed to load from the properties file!");
     }
 }
