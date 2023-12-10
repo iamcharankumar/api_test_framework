@@ -26,6 +26,11 @@ public class RestResource {
         return mapper.readValue(response.asString(), classVariable);
     }
 
+    public String serialize(Object classObject) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(classObject);
+    }
+
     protected Response getApiResponse(String endPoint) throws JsonException {
         return RestAssured.given().config(CONFIG).when().get(endPoint);
     }

@@ -8,6 +8,7 @@ import io.backend.exceptions.RickAndMortyTestException;
 import io.backend.exceptions.ZipposTestException;
 import io.restassured.response.Response;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 
 @NoArgsConstructor
 public class ApiClients extends RestResource {
@@ -20,9 +21,10 @@ public class ApiClients extends RestResource {
             throw new ZipposTestException("Client Exception: Zippost Postal Code API");
     }
 
+    @SneakyThrows
     public Response createUserResponse(CreateUsersRequest createUsersRequest) {
-        String request = createUsersRequest.toString();
         String createUserEndPoint = ApiRoutes.POST_CREATE_USER;
+        String request = serialize(createUsersRequest);
         Response createResponse = postApiResponse(request, createUserEndPoint);
         if (createResponse != null)
             return createResponse;
