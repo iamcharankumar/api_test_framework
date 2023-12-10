@@ -15,15 +15,20 @@ import org.slf4j.event.Level;
 
 @Slf4j
 @NoArgsConstructor
-public class ResponseHandlers {
+public class RestResource {
 
     private final Options OPTIONS = Options.builder().printMultiliner().targetPlatform(Platform.WINDOWS)
             .useShortForm().useLogLevel(Level.INFO).build();
     private final RestAssuredConfig CONFIG = CurlRestAssuredConfigFactory.createConfig(OPTIONS);
 
-    protected <T> T deserialize(Response response, Class<T> classVariable) throws JsonProcessingException {
+    public <T> T deserialize(Response response, Class<T> classVariable) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(response.asString(), classVariable);
+    }
+
+    public String serialize(Object classObject) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(classObject);
     }
 
     protected Response getApiResponse(String endPoint) throws JsonException {

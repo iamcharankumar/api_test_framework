@@ -1,36 +1,26 @@
 package io.backend.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+@Slf4j
 public class PropertiesHelper {
 
-    private InputStream fileInputStream;
-    private Properties properties;
-
-    private Properties loadProperties(String fileName) throws IOException {
+    public static Properties loadProperties(String fileName) {
+        Properties properties;
+        InputStream fileInputStream;
+        log.info("Loading the Properties file....");
         try {
             fileInputStream = new FileInputStream(fileName);
             properties = new Properties();
             properties.load(fileInputStream);
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fileInputStream != null)
-                fileInputStream.close();
+            throw new RuntimeException("Properties File failed to load!" + e.getMessage());
         }
         return properties;
-    }
-
-    public String getProperty(String fileName, String property) {
-        Properties hostProperties = new Properties();
-        try {
-            hostProperties = loadProperties(fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return hostProperties.getProperty(property);
     }
 }
