@@ -3,6 +3,7 @@ package io.backend.services;
 import io.backend.commons.HttpStatuses;
 import io.backend.entities.request.CreateUsersRequest;
 import io.backend.entities.response.CreateUserResponse;
+import io.backend.entities.response.IfscCodeDetailsResponse;
 import io.backend.entities.response.PostalCodeDetailsResponse;
 import io.backend.entities.response.RickAndMortyResponse;
 import io.backend.utils.RetryUtils;
@@ -44,6 +45,15 @@ public class ApiControllers {
             if (rickAndMortyCharacterResponse.getStatusCode() != HttpStatuses.OK.getCode())
                 log.error("Retrying for the Rick And Morty Character. Please stay with us...");
             return apiClients.deserialize(rickAndMortyCharacterResponse, RickAndMortyResponse.class);
+        });
+    }
+
+    public IfscCodeDetailsResponse getIfscCodeDetailsResponse(String ifscCode) {
+        return Failsafe.with(new RetryUtils().getRetryPolicyForIfscCodeTestException(2, 3)).get(() -> {
+            Response ifscCodeResponse = apiClients.getIfscCodeDetailsResponse(ifscCode);
+            if (ifscCodeResponse.getStatusCode() != HttpStatuses.OK.getCode())
+                log.error("Retrying for the IFSC Code Details. Please stay with us...");
+            return apiClients.deserialize(ifscCodeResponse, IfscCodeDetailsResponse.class);
         });
     }
 }

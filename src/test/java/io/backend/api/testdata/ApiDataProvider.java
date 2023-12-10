@@ -34,4 +34,12 @@ public class ApiDataProvider {
                 {653, "Plane Crash Survivor", "unknown", "Near-Duplicate Reality"}
         };
     }
+
+    @DataProvider(name = "ifsc-code", parallel = true)
+    private Object[][] ifscCodes() {
+        return new Object[][]{
+                {"YESB0DNB002"},
+                {"HDFC0000260"}
+        };
+    }
 }

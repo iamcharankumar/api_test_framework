@@ -3,6 +3,7 @@ package io.backend.services;
 import io.backend.commons.RestResource;
 import io.backend.constants.ApiRoutes;
 import io.backend.entities.request.CreateUsersRequest;
+import io.backend.exceptions.IFSCCodeTestException;
 import io.backend.exceptions.ReqresTestException;
 import io.backend.exceptions.RickAndMortyTestException;
 import io.backend.exceptions.ZipposTestException;
@@ -39,5 +40,14 @@ public class ApiClients extends RestResource {
             return rickAndMortyCharacterResponse;
         else
             throw new RickAndMortyTestException("Client Exception: Rick And Morty Character Details API");
+    }
+
+    public Response getIfscCodeDetailsResponse(String ifscCode) {
+        String ifscCodeDetailsEndPoint = ApiRoutes.IFSC_CODE_DETAILS + ifscCode;
+        Response ifscCodeDetailsResponse = getApiResponse(ifscCodeDetailsEndPoint);
+        if (ifscCodeDetailsResponse != null)
+            return ifscCodeDetailsResponse;
+        else
+            throw new IFSCCodeTestException("Client Exception: IFSC Code Details API");
     }
 }
