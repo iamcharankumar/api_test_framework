@@ -75,9 +75,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/apitests.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>
+                                io.backend.api.listeners.ApiListeners
+                            </value>
+                        </property>
+                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>

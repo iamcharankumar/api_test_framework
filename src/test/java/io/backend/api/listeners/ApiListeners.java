@@ -1,12 +1,13 @@
 package io.backend.api.listeners;
 
+import io.backend.utils.DateUtils;
+import io.backend.utils.TestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.time.Duration;
 import java.time.Instant;
 
 @Slf4j
@@ -16,29 +17,30 @@ public class ApiListeners implements ITestListener, ISuiteListener {
 
     @Override
     public void onStart(ISuite suite) {
-        startDate = Instant.now();
-        log.info("API Test Suite Started executing at {}.", startDate);
+        startDate = DateUtils.getCurrentInstantTimeStamp();
+        log.info("API Test Suite '{}' Started executing at {}.", suite.getName(), startDate);
     }
 
     @Override
     public void onFinish(ISuite suite) {
-        Instant endDate = Instant.now();
-        Duration timeElapsed = Duration.between(startDate, endDate);
-        log.info("API Suite Finished executing in {} seconds.", timeElapsed.getSeconds());
+        Instant endDate = DateUtils.getCurrentInstantTimeStamp();
+        long timeElapsed = DateUtils.getDurationBetweenTimeStamps(startDate, endDate);
+        log.info("API Suite Finished executing in {} seconds.", timeElapsed);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        log.info("Test Method {} is PASS.", result.getName());
+        log.info("Test Method {} is PASS.", TestUtils.concatenateTestMethodTestData(result, result.getParameters()));
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        log.info("Test Method {} FAIL.", result.getName());
+        log.info("Test Method {} is FAIL.", TestUtils.concatenateTestMethodTestData(result, result.getParameters()));
+
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        log.info("Test Method {} SKIP.", result.getName());
+        log.info("Test Method {} SKIP.", TestUtils.concatenateTestMethodTestData(result, result.getParameters()));
     }
 }

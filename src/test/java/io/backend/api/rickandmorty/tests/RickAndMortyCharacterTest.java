@@ -1,6 +1,7 @@
 package io.backend.api.rickandmorty.tests;
 
 import io.backend.api.base.BaseTest;
+import io.backend.api.constants.TestGroups;
 import io.backend.api.testdata.ApiDataProvider;
 import io.backend.entities.response.RickAndMortyResponse;
 import io.backend.services.ApiHelpers;
@@ -10,7 +11,9 @@ import org.testng.asserts.SoftAssert;
 
 @Slf4j
 public class RickAndMortyCharacterTest extends BaseTest {
-    @Test(description = "To verify, all the rick and morty character details.", dataProvider = "rick-and-morty-characters", dataProviderClass = ApiDataProvider.class)
+    @Test(description = "To verify, all the rick and morty character details.", dataProvider = "rick-and-morty-characters",
+            dataProviderClass = ApiDataProvider.class, groups = {TestGroups.RICK_MORTY_SMOKE, TestGroups.RICK_MORTY_REGRESSION,
+            TestGroups.ALL_SMOKE, TestGroups.ALL_REGRESSION})
     public void testRickAndMortyCharacters(int characterId, String characterName, String characterStatus, String characterOrigin) {
         SoftAssert softAssert = new SoftAssert();
         RickAndMortyResponse responseBody = ApiHelpers.getApiControllers().getRickAndMortyResponse(characterId);
