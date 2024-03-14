@@ -1,5 +1,6 @@
 package io.backend.api.ifsc.tests;
 
+import io.backend.api.constants.TestGroups;
 import io.backend.api.testdata.ApiDataProvider;
 import io.backend.entities.response.IfscCodeDetailsResponse;
 import io.backend.services.ApiHelpers;
@@ -9,7 +10,9 @@ import org.testng.asserts.SoftAssert;
 
 @Slf4j
 public class IfscCodeTest {
-    @Test(description = "To verify, the ifsc code details.", dataProvider = "ifsc-code", dataProviderClass = ApiDataProvider.class)
+    @Test(description = "To verify, the ifsc code details.", dataProvider = "ifsc-code",
+            dataProviderClass = ApiDataProvider.class, groups = {TestGroups.IFSC_SMOKE, TestGroups.IFSC_REGRESSION,
+            TestGroups.ALL_SMOKE, TestGroups.ALL_REGRESSION})
     public void testIfscCodeDetails(String ifscCode) {
         SoftAssert softAssert = new SoftAssert();
         IfscCodeDetailsResponse responseBody = ApiHelpers.getApiControllers().getIfscCodeDetailsResponse(ifscCode);

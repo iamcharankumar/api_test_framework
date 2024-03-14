@@ -6,36 +6,56 @@ import com.github.dzieciou.testing.curl.CurlRestAssuredConfigFactory;
 import com.github.dzieciou.testing.curl.Options;
 import com.github.dzieciou.testing.curl.Platform;
 import groovy.json.JsonException;
+import io.backend.exceptions.RestResourceException;
 import io.restassured.RestAssured;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.response.Response;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.event.Level;
 
 @Slf4j
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RestResource {
+    private static RestResource instance;
 
     private final Options OPTIONS = Options.builder().printMultiliner().targetPlatform(Platform.WINDOWS)
             .useShortForm().useLogLevel(Level.INFO).build();
     private final RestAssuredConfig CONFIG = CurlRestAssuredConfigFactory.createConfig(OPTIONS);
 
+    public static RestResource getInstance() {
+        if (instance == null) {
+            synchronized (RestResource.class) {
+                if (instance == null) {
+                    instance = new RestResource();
+                }
+            }
+        }
+        return instance;
+    }
+
     public <T> T deserialize(Response response, Class<T> classVariable) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(response.asString(), classVariable);
+        return new ObjectMapper().readValue(response.asString(), classVariable);
     }
 
-    protected String serialize(Object classObject) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(classObject);
+    public String serialize(Object classObject) throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(classObject);
     }
 
-    protected Response getApiResponse(String endPoint) throws JsonException {
-        return RestAssured.given().config(CONFIG).when().get(endPoint);
+    public Response getApiResponse(String endPoint) {
+        Response getResponse = RestAssured.given().config(CONFIG).when().get(endPoint);
+        if (getResponse != null)
+            return getResponse;
+        else
+            throw new RestResourceException("GET API Call failed!");
     }
 
-    protected Response postApiResponse(String requestBody, String endPoint) throws JsonException {
-        return RestAssured.given().config(CONFIG).body(requestBody).when().post(endPoint);
+    public Response postApiResponse(String requestBody, String endPoint) throws JsonException {
+        Response postResponse = RestAssured.given().config(CONFIG).body(requestBody).when().post(endPoint);
+        if (postResponse != null)
+            return postResponse;
+        else
+            throw new RestResourceException("POST API Call Failed!");
     }
 }

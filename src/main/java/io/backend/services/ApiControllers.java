@@ -1,6 +1,7 @@
 package io.backend.services;
 
 import io.backend.commons.HttpStatuses;
+import io.backend.commons.RestResource;
 import io.backend.entities.request.CreateUsersRequest;
 import io.backend.entities.response.CreateUserResponse;
 import io.backend.entities.response.IfscCodeDetailsResponse;
@@ -25,7 +26,7 @@ public class ApiControllers {
             Response zipposPostalCodeResponse = apiClients.getPostalCodeResponse(country, pinCode);
             if (zipposPostalCodeResponse.getStatusCode() != HttpStatuses.OK.getCode())
                 log.error("Retrying for the Zippos Postal Code. Please stay with us...");
-            return apiClients.deserialize(zipposPostalCodeResponse, PostalCodeDetailsResponse.class);
+            return RestResource.getInstance().deserialize(zipposPostalCodeResponse, PostalCodeDetailsResponse.class);
         });
     }
 
@@ -34,7 +35,7 @@ public class ApiControllers {
             Response createUserResponse = apiClients.createUserResponse(createUsersRequest);
             if (createUserResponse.getStatusCode() != HttpStatuses.OK.getCode())
                 log.error("Retrying for the Reqres Create User. Please stay with us...");
-            return apiClients.deserialize(createUserResponse, CreateUserResponse.class);
+            return RestResource.getInstance().deserialize(createUserResponse, CreateUserResponse.class);
         });
     }
 
@@ -44,7 +45,7 @@ public class ApiControllers {
             Response rickAndMortyCharacterResponse = apiClients.getRickAndMortyCharacterResponse(characterId);
             if (rickAndMortyCharacterResponse.getStatusCode() != HttpStatuses.OK.getCode())
                 log.error("Retrying for the Rick And Morty Character. Please stay with us...");
-            return apiClients.deserialize(rickAndMortyCharacterResponse, RickAndMortyResponse.class);
+            return RestResource.getInstance().deserialize(rickAndMortyCharacterResponse, RickAndMortyResponse.class);
         });
     }
 
@@ -53,7 +54,7 @@ public class ApiControllers {
             Response ifscCodeResponse = apiClients.getIfscCodeDetailsResponse(ifscCode);
             if (ifscCodeResponse.getStatusCode() != HttpStatuses.OK.getCode())
                 log.error("Retrying for the IFSC Code Details. Please stay with us...");
-            return apiClients.deserialize(ifscCodeResponse, IfscCodeDetailsResponse.class);
+            return RestResource.getInstance().deserialize(ifscCodeResponse, IfscCodeDetailsResponse.class);
         });
     }
 }

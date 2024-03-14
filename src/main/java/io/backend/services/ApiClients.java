@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
 @NoArgsConstructor
-public class ApiClients extends RestResource {
+public class ApiClients {
     public Response getPostalCodeResponse(String country, String pinCode) {
         String postalCodeEndPoint = ApiRoutes.GET_POSTAL_CODE_INFO + country + "/" + pinCode;
-        Response postalCodeResponse = getApiResponse(postalCodeEndPoint);
+        Response postalCodeResponse = RestResource.getInstance().getApiResponse(postalCodeEndPoint);
         if (postalCodeResponse != null)
             return postalCodeResponse;
         else
@@ -25,8 +25,8 @@ public class ApiClients extends RestResource {
     @SneakyThrows
     public Response createUserResponse(CreateUsersRequest createUsersRequest) {
         String createUserEndPoint = ApiRoutes.POST_CREATE_USER;
-        String request = serialize(createUsersRequest);
-        Response createResponse = postApiResponse(request, createUserEndPoint);
+        String request = RestResource.getInstance().serialize(createUsersRequest);
+        Response createResponse = RestResource.getInstance().postApiResponse(request, createUserEndPoint);
         if (createResponse != null)
             return createResponse;
         else
@@ -35,7 +35,7 @@ public class ApiClients extends RestResource {
 
     public Response getRickAndMortyCharacterResponse(int characterId) {
         String rickAndMortyCharacterEndPoint = ApiRoutes.GET_RICK_AND_MORTY_CHARACTER + characterId;
-        Response rickAndMortyCharacterResponse = getApiResponse(rickAndMortyCharacterEndPoint);
+        Response rickAndMortyCharacterResponse = RestResource.getInstance().getApiResponse(rickAndMortyCharacterEndPoint);
         if (rickAndMortyCharacterResponse != null)
             return rickAndMortyCharacterResponse;
         else
@@ -44,7 +44,7 @@ public class ApiClients extends RestResource {
 
     public Response getIfscCodeDetailsResponse(String ifscCode) {
         String ifscCodeDetailsEndPoint = ApiRoutes.IFSC_CODE_DETAILS + ifscCode;
-        Response ifscCodeDetailsResponse = getApiResponse(ifscCodeDetailsEndPoint);
+        Response ifscCodeDetailsResponse = RestResource.getInstance().getApiResponse(ifscCodeDetailsEndPoint);
         if (ifscCodeDetailsResponse != null)
             return ifscCodeDetailsResponse;
         else
