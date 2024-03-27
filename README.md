@@ -8,7 +8,7 @@
    from [here](https://github.com/reportportal/reportportal/blob/master/docker-compose.yml), a quicker way to download
    this is to use below command
    `curl https://raw.githubusercontent.com/reportportal/reportportal/master/docker-compose.yml -o docker-compose.yml`
-2. Once downloaded, execute below command to pull the required images and start containers
+2. Once downloaded, execute the below command to pull the required images and start containers
    `docker-compose -p reportportal up -d --force-recreate`
 3. Verify login http://localhost:8080/ui/#login with `default\1q2w3e` or `superadmin\erebus`
 4. Create a blank project and copy and paste the below config in `reportportal.properties` under `src/test/resources`.
@@ -28,11 +28,10 @@
 
 
 #### REPORT PORTAL OUTPUTS
-![Logs printed in the mvn command execution](/Users/charankumarh/Desktop/Test_Logs_MVN_CMD.png "Test_Logs_MVN_CMD")
+<img width="1415" alt="Test_Logs_MVN_CMD" src="https://github.com/iamcharankumar/api_test_framework/assets/29479534/16b37790-994d-4a9f-9d86-ba6656b18522">
+<img width="1728" alt="Test_Logs_Pushed_Report_Portal" src="https://github.com/iamcharankumar/api_test_framework/assets/29479534/652e0be2-748b-4d9e-ab1f-b68f1698b625">
+<img width="1728" alt="Test_Suite_Launches_Report_Portal" src="https://github.com/iamcharankumar/api_test_framework/assets/29479534/9e22ff4c-4051-4b9e-af9a-001684c7a797">
 
-![Logs pushed in the report portal](/Users/charankumarh/Desktop/Test_Suite_Launches_Report_Portal.png "Test_Logs_Pushed_Report_Portal")
-
-![Test Suite Launches in the Report Portal](/Users/charankumarh/Desktop/Test_Logs_Pushed_Report_Portal.png "Test_Suite_Launches_Report_Portal")
 
 # STEPS FOR THE TEST EXECUTION
 
