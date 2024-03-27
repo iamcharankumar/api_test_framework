@@ -26,6 +26,7 @@ public class ApiListeners implements ITestListener, ISuiteListener {
         Instant endDate = DateUtils.getCurrentInstantTimeStamp();
         long timeElapsed = DateUtils.getDurationBetweenTimeStamps(startDate, endDate);
         log.info("API Suite Finished executing in {} seconds.", timeElapsed);
+        log.info("Test Results are here -> {}", TestUtils.getReportPortalLaunchUrl());
     }
 
     @Override
