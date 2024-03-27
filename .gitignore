@@ -184,3 +184,5 @@ SauceLabsWebTest.iml
 test-output/
 .idea/modules.xml
 .idea/
+
+logs/
