@@ -5,7 +5,7 @@ import io.backend.api.constants.TestGroups;
 import io.backend.api.testdata.ApiDataProvider;
 import io.backend.entities.request.CreateUsersRequest;
 import io.backend.entities.response.CreateUserResponse;
-import io.backend.services.ApiHelpers;
+import io.backend.services.rest.ApiHelpers;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;

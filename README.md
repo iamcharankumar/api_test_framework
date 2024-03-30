@@ -13,7 +13,9 @@
 3. Verify login http://localhost:8080/ui/#login with `default\1q2w3e` or `superadmin\erebus`
 4. Create a blank project and copy and paste the below config in `reportportal.properties` under `src/test/resources`.
    See the table below.
-5. Read these great posts written below by [Automation Hacks](https://github.com/automationhacks) to configure Report portal. By far, these are the only posts with accurate steps.
+5. Read these great posts written below by [Automation Hacks](https://github.com/automationhacks) to configure Report
+   portal.
+   By far, these are the only posts with accurate steps.
     1. Further reading on setting up the reportportal
        is [here](https://automationhacks.io/2020/03/02/how-to-setup-reportportal-on-a-local-docker-instance/).
     2. Further reading on configuring logback with reportportal to push logs
@@ -26,12 +28,23 @@
 | 3     | rp.launch                   | Java launch                  |
 | 4     | rp.project                  | api_tests                    |
 
-
 #### REPORT PORTAL OUTPUTS
+
 <img width="1415" alt="Test_Logs_MVN_CMD" src="https://github.com/iamcharankumar/api_test_framework/assets/29479534/16b37790-994d-4a9f-9d86-ba6656b18522">
 <img width="1728" alt="Test_Logs_Pushed_Report_Portal" src="https://github.com/iamcharankumar/api_test_framework/assets/29479534/652e0be2-748b-4d9e-ab1f-b68f1698b625">
 <img width="1728" alt="Test_Suite_Launches_Report_Portal" src="https://github.com/iamcharankumar/api_test_framework/assets/29479534/9e22ff4c-4051-4b9e-af9a-001684c7a797">
 
+# STEPS FOR INTEGRATING TEST REPORTS [REPORT PORTAL URL] WITH DISCORD MESSAGE SERVICE
+
+1. Create a discord account and follow the steps
+   given [here](https://www.svix.com/resources/guides/how-to-make-webhook-discord/) to configure a message channel and
+   send the test reports after the test execution.
+2. Pass your channel's webhook token in the ApiConstants class.
+3. Here we will send the Report Portal Launch URL along with test case metrics. So make sure that your report portal is
+   up and running.
+4. You're ready to execute your tests now. Follow the below section.
+
+#### DISCORD OUTPUTS
 
 # STEPS FOR THE TEST EXECUTION
 

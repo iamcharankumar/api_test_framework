@@ -6,6 +6,7 @@ import com.github.dzieciou.testing.curl.CurlRestAssuredConfigFactory;
 import com.github.dzieciou.testing.curl.Options;
 import com.github.dzieciou.testing.curl.Platform;
 import groovy.json.JsonException;
+import io.backend.constants.ApiConstants;
 import io.backend.exceptions.RestResourceException;
 import io.restassured.RestAssured;
 import io.restassured.config.RestAssuredConfig;
@@ -52,7 +53,7 @@ public class RestResource {
     }
 
     public Response postApiResponse(String requestBody, String endPoint) throws JsonException {
-        Response postResponse = RestAssured.given().config(CONFIG).body(requestBody).when().post(endPoint);
+        Response postResponse = RestAssured.given().contentType(ApiConstants.CONTENT_TYPE).config(CONFIG).body(requestBody).when().post(endPoint);
         if (postResponse != null)
             return postResponse;
         else

@@ -1,4 +1,4 @@
-package io.backend.services;
+package io.backend.services.rest;
 
 import io.backend.commons.HttpStatuses;
 import io.backend.commons.RestResource;

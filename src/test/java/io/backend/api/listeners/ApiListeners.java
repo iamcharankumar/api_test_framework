@@ -1,12 +1,10 @@
 package io.backend.api.listeners;
 
 import io.backend.utils.DateUtils;
+import io.backend.utils.DiscordUtils;
 import io.backend.utils.TestUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.testng.ISuite;
-import org.testng.ISuiteListener;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import org.testng.*;
 
 import java.time.Instant;
 
@@ -22,11 +20,16 @@ public class ApiListeners implements ITestListener, ISuiteListener {
     }
 
     @Override
-    public void onFinish(ISuite suite) {
+    public void onFinish(ITestContext context) {
         Instant endDate = DateUtils.getCurrentInstantTimeStamp();
         long timeElapsed = DateUtils.getDurationBetweenTimeStamps(startDate, endDate);
         log.info("API Suite Finished executing in {} seconds.", timeElapsed);
-        log.info("Test Results are here -> {}", TestUtils.getReportPortalLaunchUrl());
+        int passedTestCases = context.getPassedTests().size();
+        int failedTestCases = context.getFailedTests().size();
+        int skippedTestCases = context.getSkippedTests().size();
+        int totalTestCases = passedTestCases + failedTestCases + skippedTestCases;
+        String discordMessage = DiscordUtils.buildDiscordMessage(passedTestCases, failedTestCases, skippedTestCases, totalTestCases);
+        DiscordUtils.sendMessageToChannel(discordMessage);
     }
 
     @Override
