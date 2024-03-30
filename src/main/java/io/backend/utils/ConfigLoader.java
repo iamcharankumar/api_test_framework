@@ -1,10 +1,7 @@
 package io.backend.utils;
 
 import io.backend.constants.ApiConstants;
-import io.backend.exceptions.IFSCCodeTestException;
-import io.backend.exceptions.ReqresTestException;
-import io.backend.exceptions.RickAndMortyTestException;
-import io.backend.exceptions.ZipposTestException;
+import io.backend.exceptions.*;
 
 import java.util.Properties;
 
@@ -55,5 +52,14 @@ public class ConfigLoader {
             return ifscCodeHost;
         else
             throw new IFSCCodeTestException("IFSC Code Host failed to load from the properties file!");
+    }
+
+    public String getDiscordHost() {
+        String discordHost = PROPERTIES.getProperty("DISCORD_HOST");
+        if (discordHost != null)
+            return discordHost;
+        else
+            throw new DiscordException("Discord Host failed to load from the properties file!");
+
     }
 }

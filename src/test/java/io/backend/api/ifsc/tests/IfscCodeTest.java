@@ -3,7 +3,7 @@ package io.backend.api.ifsc.tests;
 import io.backend.api.constants.TestGroups;
 import io.backend.api.testdata.ApiDataProvider;
 import io.backend.entities.response.IfscCodeDetailsResponse;
-import io.backend.services.ApiHelpers;
+import io.backend.services.rest.ApiHelpers;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;

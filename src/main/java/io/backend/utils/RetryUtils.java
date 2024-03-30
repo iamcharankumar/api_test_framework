@@ -1,9 +1,6 @@
 package io.backend.utils;
 
-import io.backend.exceptions.IFSCCodeTestException;
-import io.backend.exceptions.ReqresTestException;
-import io.backend.exceptions.RickAndMortyTestException;
-import io.backend.exceptions.ZipposTestException;
+import io.backend.exceptions.*;
 import net.jodah.failsafe.RetryPolicy;
 import org.apache.http.NoHttpResponseException;
 
@@ -40,5 +37,9 @@ public class RetryUtils {
 
     public RetryPolicy<Object> getRetryPolicyForIfscCodeTestException(int delayInSeconds, int maxRetries) {
         return getDefaultRetryPolicy(delayInSeconds, maxRetries).handle(IFSCCodeTestException.class);
+    }
+
+    public RetryPolicy<Object> getRetryPolicyForDiscordException(int delayInSeconds, int maxRetries) {
+        return getDefaultRetryPolicy(delayInSeconds, maxRetries).handle(DiscordException.class);
     }
 }

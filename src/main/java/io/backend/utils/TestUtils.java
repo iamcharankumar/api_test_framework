@@ -26,6 +26,14 @@ public class TestUtils {
             throw new TestUtilsException("Test Method and Test Data Concatenation Failed!");
     }
 
+    public static int calculateTestCasePercentage(int numberOfTestCases, int totalTestCases) {
+        if (totalTestCases > 0) {
+            double testCasePercentage = ((double) numberOfTestCases / totalTestCases) * 100;
+            return (int) testCasePercentage;
+        } else
+            throw new TestUtilsException("Cannot be divided by Zero! Total Test Cases cannot be Zero.");
+    }
+
     public static String getReportPortalLaunchUrl() {
         Launch launch = Optional.ofNullable(Launch.currentLaunch()).filter(currentLaunch -> currentLaunch != Launch.NOOP_LAUNCH)
                 .orElseThrow(() -> new IllegalArgumentException("Launch Not Found"));
