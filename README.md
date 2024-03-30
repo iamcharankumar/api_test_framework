@@ -13,7 +13,7 @@
 3. Verify login http://localhost:8080/ui/#login with `default\1q2w3e` or `superadmin\erebus`
 4. Create a blank project and copy and paste the below config in `reportportal.properties` under `src/test/resources`.
    See the table below.
-5. Read these great posts written below by [Automation Hacks](https://github.com/automationhacks) to configure Report
+5. Read these great posts written below by [Automation Hacks](https://github.com/automationhacks) to configure the Report
    portal.
    By far, these are the only posts with accurate steps.
     1. Further reading on setting up the reportportal
@@ -39,12 +39,14 @@
 1. Create a discord account and follow the steps
    given [here](https://www.svix.com/resources/guides/how-to-make-webhook-discord/) to configure a message channel and
    send the test reports after the test execution.
-2. Pass your channel's webhook token in the ApiConstants class.
+2. Pass your channel's webhook token in the `ApiConstants` class.
 3. Here we will send the Report Portal Launch URL along with test case metrics. So make sure that your report portal is
    up and running.
 4. You're ready to execute your tests now. Follow the below section.
 
 #### DISCORD OUTPUTS
+
+<img width="935" alt="Discord_Test_Report" src="https://github.com/iamcharankumar/api_test_framework/assets/29479534/67c65fe5-a340-4e63-aa45-64d153704ad9">
 
 # STEPS FOR THE TEST EXECUTION
 
@@ -57,4 +59,4 @@
 **4. mvn clean test -Dgroups=ALL_SMOKE,ALL_REGRESSION -Dtestng.parallel=methods -DthreadPoolSize=3
 -Ddataproviderthreadcount=3**
 
-**Note:** To run specific test cases, use appropriate Test groups present in 'TestGroups' class.
+**Note:** To run specific test cases, use appropriate Test groups present in the 'TestGroups' class.
