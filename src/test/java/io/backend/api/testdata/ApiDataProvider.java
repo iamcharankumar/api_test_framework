@@ -6,7 +6,7 @@ public class ApiDataProvider {
 
     @DataProvider(name = "postal-codes", parallel = true)
     private Object[][] postalCodes() {
-        return new Object[][]{{"us", "90210"}};
+        return new Object[][]{{"us", "90210", "United States"}};
     }
 
     @DataProvider(name = "create-employee", parallel = true)
