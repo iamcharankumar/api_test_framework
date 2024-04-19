@@ -8,7 +8,6 @@ import io.backend.entities.response.PostalCodeDetailsResponse;
 import io.backend.services.rest.ApiHelpers;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 @Slf4j
 public class PostalCodeTest extends BaseTest {
@@ -16,13 +15,11 @@ public class PostalCodeTest extends BaseTest {
     @Test(description = "To verify, postal code details for the given country and pin code", dataProvider = "postal-codes",
             dataProviderClass = ApiDataProvider.class, groups = {TestGroups.ZIPPOS_SMOKE, TestGroups.ZIPPOS_REGRESSION,
             TestGroups.ALL_SMOKE, TestGroups.ALL_REGRESSION})
-    public void testPostalCodeDetails(String country, String pinCode) {
-        SoftAssert softAssert = new SoftAssert();
+    public void testPostalCodeDetails(String country, String pinCode, String fullCountryName) {
         PostalCodeDetailsResponse responseBody = ApiHelpers.getApiControllers().getPostalCodeDetailsResponse(country, pinCode);
-        softAssert.assertEquals(responseBody.getCountry(), "United States", "Postal Code Country Mismatched!");
+        softAssert.assertEquals(responseBody.getCountry(), fullCountryName, "Postal Code Country Mismatched!");
         softAssert.assertEquals(responseBody.getPostCode(), pinCode, "Post Code pin code Mismatched!");
-        log.info("Verified the Postal Code details with country {} and pin code {}",
-                responseBody.getCountry(), responseBody.getPostCode());
         softAssert.assertAll();
+        log.info("Verified the Postal Code details with country {} and pin code {}", responseBody.getCountry(), responseBody.getPostCode());
     }
 }
