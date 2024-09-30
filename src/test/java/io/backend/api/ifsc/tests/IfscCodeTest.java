@@ -7,12 +7,14 @@ import io.backend.entities.response.IfscCodeDetailsResponse;
 import io.backend.services.rest.ApiHelpers;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 @Slf4j
 public class IfscCodeTest extends BaseTest {
     @Test(description = "To verify, the ifsc code details.", dataProvider = "ifsc-code", dataProviderClass = ApiDataProvider.class,
             groups = {TestGroups.IFSC_SMOKE, TestGroups.IFSC_REGRESSION, TestGroups.ALL_SMOKE, TestGroups.ALL_REGRESSION})
     public void testIfscCodeDetails(String ifscCode) {
+        SoftAssert softAssert = new SoftAssert();
         IfscCodeDetailsResponse responseBody = ApiHelpers.getApiControllers().getIfscCodeDetailsResponse(ifscCode);
         softAssert.assertEquals(responseBody.getIfsc(), ifscCode, "IFSC Code Mismatched!");
         softAssert.assertAll();

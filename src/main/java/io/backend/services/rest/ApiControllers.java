@@ -15,7 +15,7 @@ import net.jodah.failsafe.Failsafe;
 @Slf4j
 public class ApiControllers {
 
-    ApiClients apiClients;
+    private final ApiClients apiClients;
 
     public ApiControllers() {
         this.apiClients = new ApiClients();
