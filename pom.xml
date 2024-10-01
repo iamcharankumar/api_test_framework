@@ -79,8 +79,8 @@
                         <property>
                             <name>listener</name>
                             <value>
-                                io.backend.api.listeners.ApiListeners,
-                                com.epam.reportportal.testng.ReportPortalTestNGListener
+                                <!--                                io.backend.api.listeners.ApiListeners,-->
+                                <!--                                com.epam.reportportal.testng.ReportPortalTestNGListener-->
                             </value>
                         </property>
                     </properties>
