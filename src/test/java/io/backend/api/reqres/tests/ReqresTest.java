@@ -8,6 +8,7 @@ import io.backend.entities.response.CreateUserResponse;
 import io.backend.services.rest.ApiHelpers;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 @Slf4j
 public class ReqresTest extends BaseTest {
@@ -16,6 +17,7 @@ public class ReqresTest extends BaseTest {
             dataProviderClass = ApiDataProvider.class, groups = {TestGroups.REQ_RES_SMOKE, TestGroups.REQ_RES_REGRESSION,
             TestGroups.ALL_SMOKE, TestGroups.ALL_REGRESSION})
     public void testUserDetails(String name, String job) {
+        SoftAssert softAssert = new SoftAssert();
         CreateUsersRequest createUsersRequest = new CreateUsersRequest(name, job);
         CreateUserResponse responseBody = ApiHelpers.getApiControllers().getCreateUserResponse(createUsersRequest);
         softAssert.assertFalse(responseBody.getId().isEmpty(), "Create User ID is empty!");

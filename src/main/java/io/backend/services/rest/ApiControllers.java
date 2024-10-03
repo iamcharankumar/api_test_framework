@@ -19,15 +19,15 @@ import net.jodah.failsafe.Failsafe;
 @Slf4j
 public class ApiControllers {
 
-    ApiClients apiClients;
+    private final ApiClients API_CLIENTS;
 
     public ApiControllers() {
-        this.apiClients = new ApiClients();
+        this.API_CLIENTS = new ApiClients();
     }
 
     public PostalCodeDetailsResponse getPostalCodeDetailsResponse(String country, String pinCode) {
         return Failsafe.with(new RetryUtils().getRetryPolicyForZipposTestException(2, 3)).get(() -> {
-            Response zipposPostalCodeResponse = apiClients.getPostalCodeResponse(country, pinCode);
+            Response zipposPostalCodeResponse = API_CLIENTS.getPostalCodeResponse(country, pinCode);
             if (zipposPostalCodeResponse.getStatusCode() != HttpStatuses.OK.getCode()) {
                 log.error("Retrying for the Zippos Postal Code. Please stay with us...");
                 throw new ZipposTestException("Zippos Postal Code Details Status code mismatched!");
@@ -38,8 +38,8 @@ public class ApiControllers {
 
     public CreateUserResponse getCreateUserResponse(CreateUsersRequest createUsersRequest) {
         return Failsafe.with(new RetryUtils().getRetryPolicyForReqresTestException(2, 3)).get(() -> {
-            Response createUserResponse = apiClients.createUserResponse(createUsersRequest);
-            if (createUserResponse.getStatusCode() != HttpStatuses.OK.getCode()) {
+            Response createUserResponse = API_CLIENTS.createUserResponse(createUsersRequest);
+            if (createUserResponse.getStatusCode() != HttpStatuses.CREATED.getCode()) {
                 log.error("Retrying for the Reqres Create User. Please stay with us...");
                 throw new ReqresTestException("Reqres Create User status code mismatched!");
             }
@@ -50,7 +50,7 @@ public class ApiControllers {
 
     public RickAndMortyResponse getRickAndMortyResponse(int characterId) {
         return Failsafe.with(new RetryUtils().getRetryPolicyForRickAndMortyTestException(2, 3)).get(() -> {
-            Response rickAndMortyCharacterResponse = apiClients.getRickAndMortyCharacterResponse(characterId);
+            Response rickAndMortyCharacterResponse = API_CLIENTS.getRickAndMortyCharacterResponse(characterId);
             if (rickAndMortyCharacterResponse.getStatusCode() != HttpStatuses.OK.getCode()) {
                 log.error("Retrying for the Rick And Morty Character. Please stay with us...");
                 throw new RickAndMortyTestException("Rick and Morty Get Character Details status code mismatched!");
@@ -61,7 +61,7 @@ public class ApiControllers {
 
     public IfscCodeDetailsResponse getIfscCodeDetailsResponse(String ifscCode) {
         return Failsafe.with(new RetryUtils().getRetryPolicyForIfscCodeTestException(2, 3)).get(() -> {
-            Response ifscCodeResponse = apiClients.getIfscCodeDetailsResponse(ifscCode);
+            Response ifscCodeResponse = API_CLIENTS.getIfscCodeDetailsResponse(ifscCode);
             if (ifscCodeResponse.getStatusCode() != HttpStatuses.OK.getCode()) {
                 log.error("Retrying for the IFSC Code Details. Please stay with us...");
                 throw new IFSCCodeTestException("IFSC Code Details Status code mismatched!");

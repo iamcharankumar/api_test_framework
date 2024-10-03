@@ -1,5 +1,7 @@
 package io.backend.api.testdata;
 
+import io.backend.entities.response.IfscCodeDetailsResponse;
+import io.backend.services.rest.ApiHelpers;
 import org.testng.annotations.DataProvider;
 
 public class ApiDataProvider {
@@ -38,8 +40,12 @@ public class ApiDataProvider {
     @DataProvider(name = "ifsc-code", parallel = true)
     private Object[][] ifscCodes() {
         return new Object[][]{
-                {"YESB0DNB002"},
-                {"HDFC0000260"}
+                {getIfscCodeDetailsResponse("YESB0DNB002"), "YESB0DNB002"},
+                {getIfscCodeDetailsResponse("HDFC0000260"), "HDFC0000260"}
         };
+    }
+
+    private IfscCodeDetailsResponse getIfscCodeDetailsResponse(String ifscCode) {
+        return ApiHelpers.getApiControllers().getIfscCodeDetailsResponse(ifscCode);
     }
 }
