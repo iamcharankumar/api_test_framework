@@ -1,16 +1,17 @@
 package io.backend.utils;
 
-import io.backend.constants.ApiConstants;
 import io.backend.exceptions.*;
 
 import java.util.Properties;
 
 public class ConfigLoader {
+
     private final Properties PROPERTIES;
     private static ConfigLoader instance;
+    private static final String API_PROPERTY_FILE = "./src/main/java/resource/api.properties";
 
     private ConfigLoader() {
-        PROPERTIES = PropertiesHelper.loadProperties(ApiConstants.API_PROPERTY_FILE);
+        PROPERTIES = PropertiesHelper.loadProperties(API_PROPERTY_FILE);
     }
 
     public static ConfigLoader getInstance() {
