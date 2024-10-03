@@ -2,7 +2,6 @@ package io.backend.services.rest;
 
 import io.backend.commons.HttpStatuses;
 import io.backend.commons.RestResource;
-import io.backend.entities.request.CreateUsersRequest;
 import io.backend.entities.response.CreateUserResponse;
 import io.backend.entities.response.IfscCodeDetailsResponse;
 import io.backend.entities.response.PostalCodeDetailsResponse;
@@ -36,9 +35,9 @@ public class ApiControllers {
         });
     }
 
-    public CreateUserResponse getCreateUserResponse(CreateUsersRequest createUsersRequest) {
+    public CreateUserResponse getCreateUserResponse(String name, String job) {
         return Failsafe.with(new RetryUtils().getRetryPolicyForReqresTestException(2, 3)).get(() -> {
-            Response createUserResponse = API_CLIENTS.createUserResponse(createUsersRequest);
+            Response createUserResponse = API_CLIENTS.createUserResponse(name, job);
             if (createUserResponse.getStatusCode() != HttpStatuses.CREATED.getCode()) {
                 log.error("Retrying for the Reqres Create User. Please stay with us...");
                 throw new ReqresTestException("Reqres Create User status code mismatched!");

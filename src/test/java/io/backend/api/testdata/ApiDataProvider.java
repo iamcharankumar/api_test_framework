@@ -1,6 +1,9 @@
 package io.backend.api.testdata;
 
+import io.backend.entities.response.CreateUserResponse;
 import io.backend.entities.response.IfscCodeDetailsResponse;
+import io.backend.entities.response.PostalCodeDetailsResponse;
+import io.backend.entities.response.RickAndMortyResponse;
 import io.backend.services.rest.ApiHelpers;
 import org.testng.annotations.DataProvider;
 
@@ -8,7 +11,13 @@ public class ApiDataProvider {
 
     @DataProvider(name = "postal-codes", parallel = true)
     private Object[][] postalCodes() {
-        return new Object[][]{{"us", "90210", "United States"}};
+        return new Object[][]{
+                {getPostalCodeDetailsResponse("us", "90210"), "us", "90210", "United States"}
+        };
+    }
+
+    private PostalCodeDetailsResponse getPostalCodeDetailsResponse(String country, String pinCode) {
+        return ApiHelpers.getApiControllers().getPostalCodeDetailsResponse(country, pinCode);
     }
 
     @DataProvider(name = "create-employee", parallel = true)
@@ -21,20 +30,28 @@ public class ApiDataProvider {
     @DataProvider(name = "create-user", parallel = true)
     private Object[][] createUser() {
         return new Object[][]{
-                {"morpheus", "leader"}
+                {getCreateUserResponse("morpheus", "leader")}
         };
+    }
+
+    private CreateUserResponse getCreateUserResponse(String name, String job) {
+        return ApiHelpers.getApiControllers().getCreateUserResponse(name, job);
     }
 
     @DataProvider(name = "rick-and-morty-characters", parallel = true)
     private Object[][] rickAndMortyCharacters() {
         return new Object[][]{
-                {50, "Blim Blam", "Alive", "unknown"},
-                {290, "Rick Sanchez", "Dead", "Earth (Evil Rick's Target Dimension)"},
-                {303, "Samantha", "Alive", "Earth (C-137)"},
-                {473, "Bartender Morty", "Alive", "unknown"},
-                {572, "Robot Snake", "unknown", "Snake Planet"},
-                {653, "Plane Crash Survivor", "unknown", "Near-Duplicate Reality"}
+                {getRickAndMortyResponse(50), 50, "Blim Blam", "Alive", "unknown"},
+                {getRickAndMortyResponse(290), 290, "Rick Sanchez", "Dead", "Earth (Evil Rick's Target Dimension)"},
+                {getRickAndMortyResponse(303), 303, "Samantha", "Alive", "Earth (C-137)"},
+                {getRickAndMortyResponse(473), 473, "Bartender Morty", "Alive", "unknown"},
+                {getRickAndMortyResponse(572), 572, "Robot Snake", "unknown", "Snake Planet"},
+                {getRickAndMortyResponse(653), 653, "Plane Crash Survivor", "unknown", "Near-Duplicate Reality"}
         };
+    }
+
+    private RickAndMortyResponse getRickAndMortyResponse(int characterId) {
+        return ApiHelpers.getApiControllers().getRickAndMortyResponse(characterId);
     }
 
     @DataProvider(name = "ifsc-code", parallel = true)

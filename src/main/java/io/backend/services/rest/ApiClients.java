@@ -22,7 +22,8 @@ public class ApiClients {
     }
 
     @SneakyThrows
-    public Response createUserResponse(CreateUsersRequest createUsersRequest) {
+    public Response createUserResponse(String name, String job) {
+        CreateUsersRequest createUsersRequest = new CreateUsersRequest(name, job);
         String createUserEndPoint = ApiRoutes.POST_CREATE_USER;
         String request = RestResource.getInstance().serialize(createUsersRequest);
         Response createResponse = RestResource.getInstance().postApiResponse(request, createUserEndPoint);
