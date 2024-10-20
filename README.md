@@ -2,6 +2,10 @@
 
 #### A REST API Test Framework for developing the regression suites. The test cases can be run locally or through CI/CD.
 
+# TEST FRAMEWORK DESIGN
+
+![Charankumar_H_Test_Arch](https://github.com/user-attachments/assets/c7290a13-c39e-4e01-96c8-da743bfd43bc)
+
 # STEPS FOR INTEGRATING TESTNG & REPORT PORTAL
 
 1. Download the latest docker-compose.yml
