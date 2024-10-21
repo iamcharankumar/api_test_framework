@@ -4,6 +4,8 @@
 
 # TEST FRAMEWORK DESIGN
 
+- Triggering the automation through a maven command or a testng xml file is the starting point.
+  
 ![Charankumar_H_Test_Arch](https://github.com/user-attachments/assets/c7290a13-c39e-4e01-96c8-da743bfd43bc)
 
 # STEPS FOR INTEGRATING TESTNG & REPORT PORTAL
