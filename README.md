@@ -65,7 +65,7 @@ To override the thread values use `-DthreadPoolSize=3 -Ddataproviderthreadcount=
 
 **3. git pull**
 
-**4. mvn clean test -Dgroups=ALL_SMOKE,ALL_REGRESSION -Dtestng.parallel=methods**
+**4. mvn clean test -Dgroups=ALL_SMOKE,ALL_REGRESSION -Dthreads=3 -Ddataproviderthreadcount=3**
 
 **Note:** 
 
