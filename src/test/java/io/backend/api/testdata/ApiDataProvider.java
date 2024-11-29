@@ -4,6 +4,7 @@ import io.backend.entities.response.CreateUserResponse;
 import io.backend.entities.response.IfscCodeDetailsResponse;
 import io.backend.entities.response.PostalCodeDetailsResponse;
 import io.backend.entities.response.RickAndMortyResponse;
+import io.backend.entities.response.automationexercise.GetAllProductListResponse;
 import io.backend.services.rest.ApiHelpers;
 import org.testng.annotations.DataProvider;
 
@@ -64,5 +65,17 @@ public class ApiDataProvider {
 
     private IfscCodeDetailsResponse getIfscCodeDetailsResponse(String ifscCode) {
         return ApiHelpers.getApiControllers().getIfscCodeDetailsResponse(ifscCode);
+    }
+
+    @DataProvider(name = "get-all-products", parallel = true)
+    private Object[][] allProductsList() {
+        final GetAllProductListResponse productListResponse = ApiHelpers.getApiControllers().getAllProductListResponse();
+        return new Object[][]{
+                {productListResponse, 1, "Blue Top", "Rs. 500", "Polo", "Women", "Tops"},
+                {productListResponse, 2, "Men Tshirt", "Rs. 400", "H&M", "Men", "Tshirts"},
+                {productListResponse, 3, "Sleeveless Dress", "Rs. 1000", "Madame", "Women", "Dress"},
+                {productListResponse, 4, "Stylish Dress", "Rs. 1500", "Madame", "Women", "Dress"},
+                {productListResponse, 43, "GRAPHIC DESIGN MEN T SHIRT - BLUE", "Rs. 1389", "Mast & Harbour", "Men", "Tshirts"}
+        };
     }
 }

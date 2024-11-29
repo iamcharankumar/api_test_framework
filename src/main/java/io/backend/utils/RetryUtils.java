@@ -39,6 +39,10 @@ public class RetryUtils {
         return getDefaultRetryPolicy(delayInSeconds, maxRetries).handle(IFSCCodeTestException.class);
     }
 
+    public RetryPolicy<Object> getRetryPolicyForAutomationExerciseException(int delayInSeconds, int maxRetries) {
+        return getDefaultRetryPolicy(delayInSeconds, maxRetries).handle(AutomationExerciseException.class);
+    }
+
     public RetryPolicy<Object> getRetryPolicyForDiscordException(int delayInSeconds, int maxRetries) {
         return getDefaultRetryPolicy(delayInSeconds, maxRetries).handle(DiscordException.class);
     }

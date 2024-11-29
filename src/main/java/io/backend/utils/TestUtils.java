@@ -36,12 +36,12 @@ public class TestUtils {
 
     public static String getReportPortalLaunchUrl() {
         Launch launch = Optional.ofNullable(Launch.currentLaunch()).filter(currentLaunch -> currentLaunch != Launch.NOOP_LAUNCH)
-                .orElseThrow(() -> new IllegalArgumentException("Launch Not Found"));
+                .orElse(null);
+        if (launch == null)
+            return "Report Portal Listener is disabled!";
         ListenerParameters parameters = launch.getParameters();
         String launchUuid = launch.getLaunch().blockingGet();
         String baseUrl = parameters.getBaseUrl();
-        String reportPortalUrl = baseUrl + "/ui/#" + parameters.getProjectName() + "/launches/all/" + launchUuid;
-        log.info("Launch URL: {}/ui/#{}/launches/all/{}", baseUrl, parameters.getProjectName(), launchUuid);
-        return reportPortalUrl;
+        return baseUrl + "/ui/#" + parameters.getProjectName() + "/launches/all/" + launchUuid;
     }
 }
