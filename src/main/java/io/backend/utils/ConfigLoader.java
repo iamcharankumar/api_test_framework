@@ -1,7 +1,6 @@
 package io.backend.utils;
 
-import io.backend.exceptions.*;
-
+import java.util.Objects;
 import java.util.Properties;
 
 public class ConfigLoader {
@@ -25,42 +24,31 @@ public class ConfigLoader {
     }
 
     public String getZipposHost() {
-        String zipposHost = PROPERTIES.getProperty("ZIPPOS_HOST");
-        if (zipposHost != null)
-            return zipposHost;
-        else
-            throw new ZipposTestException("Zippos Host failed to load from the properties file!");
+        return getPropertyValue("ZIPPOS_HOST");
     }
 
     public String getReqresHost() {
-        String reqresHost = PROPERTIES.getProperty("REQRES_HOST");
-        if (reqresHost != null)
-            return reqresHost;
-        else
-            throw new ReqresTestException("Reqres Host failed to load from the properties file!");
+        return getPropertyValue("REQRES_HOST");
     }
 
     public String getRickAndMortyHost() {
-        String rickAndMortyHost = PROPERTIES.getProperty("RICK_AND_MORTY_HOST");
-        if (rickAndMortyHost != null)
-            return rickAndMortyHost;
-        else throw new RickAndMortyTestException("Rick And Morty Host failed to load from the properties file!");
+        return getPropertyValue("RICK_AND_MORTY_HOST");
     }
 
     public String getIfscCodeHost() {
-        String ifscCodeHost = PROPERTIES.getProperty("IFSC_CODE_HOST");
-        if (ifscCodeHost != null)
-            return ifscCodeHost;
-        else
-            throw new IFSCCodeTestException("IFSC Code Host failed to load from the properties file!");
+        return getPropertyValue("IFSC_CODE_HOST");
+    }
+
+    public String getAutomationExerciseHost() {
+        return getPropertyValue("AUTOMATION_EXERCISE");
     }
 
     public String getDiscordHost() {
-        String discordHost = PROPERTIES.getProperty("DISCORD_HOST");
-        if (discordHost != null)
-            return discordHost;
-        else
-            throw new DiscordException("Discord Host failed to load from the properties file!");
+        return getPropertyValue("DISCORD_HOST");
+    }
 
+    public String getPropertyValue(String propertyKey) {
+        Objects.requireNonNull(propertyKey, "Property Value for Property Key: " + propertyKey + " is null or empty!");
+        return PROPERTIES.getProperty(propertyKey);
     }
 }

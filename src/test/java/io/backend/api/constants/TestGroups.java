@@ -15,4 +15,5 @@ public final class TestGroups {
     public static final String RICK_MORTY_REGRESSION = "RICK_MORTY_REGRESSION";
     public static final String ZIPPOS_SMOKE = "ZIPPOS_SMOKE";
     public static final String ZIPPOS_REGRESSION = "ZIPPOS_REGRESSION";
+    public static final String AUTOMATION_EXERCISE_REGRESSION = "AUTOMATION_EXERCISE_REGRESSION";
 }

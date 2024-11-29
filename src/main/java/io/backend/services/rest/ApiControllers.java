@@ -1,15 +1,13 @@
 package io.backend.services.rest;
 
 import io.backend.commons.HttpStatuses;
-import io.backend.commons.RestResource;
+import io.backend.constants.ApiConstants;
 import io.backend.entities.response.CreateUserResponse;
 import io.backend.entities.response.IfscCodeDetailsResponse;
 import io.backend.entities.response.PostalCodeDetailsResponse;
 import io.backend.entities.response.RickAndMortyResponse;
-import io.backend.exceptions.IFSCCodeTestException;
-import io.backend.exceptions.ReqresTestException;
-import io.backend.exceptions.RickAndMortyTestException;
-import io.backend.exceptions.ZipposTestException;
+import io.backend.entities.response.automationexercise.GetAllProductListResponse;
+import io.backend.exceptions.*;
 import io.backend.utils.RetryUtils;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +29,7 @@ public class ApiControllers {
                 log.error("Retrying for the Zippos Postal Code. Please stay with us...");
                 throw new ZipposTestException("Zippos Postal Code Details Status code mismatched!");
             }
-            return RestResource.getInstance().deserialize(zipposPostalCodeResponse, PostalCodeDetailsResponse.class);
+            return ApiConstants.REST_RESOURCE.deserialize(zipposPostalCodeResponse, PostalCodeDetailsResponse.class);
         });
     }
 
@@ -42,7 +40,7 @@ public class ApiControllers {
                 log.error("Retrying for the Reqres Create User. Please stay with us...");
                 throw new ReqresTestException("Reqres Create User status code mismatched!");
             }
-            return RestResource.getInstance().deserialize(createUserResponse, CreateUserResponse.class);
+            return ApiConstants.REST_RESOURCE.deserialize(createUserResponse, CreateUserResponse.class);
         });
     }
 
@@ -54,7 +52,7 @@ public class ApiControllers {
                 log.error("Retrying for the Rick And Morty Character. Please stay with us...");
                 throw new RickAndMortyTestException("Rick and Morty Get Character Details status code mismatched!");
             }
-            return RestResource.getInstance().deserialize(rickAndMortyCharacterResponse, RickAndMortyResponse.class);
+            return ApiConstants.REST_RESOURCE.deserialize(rickAndMortyCharacterResponse, RickAndMortyResponse.class);
         });
     }
 
@@ -65,7 +63,18 @@ public class ApiControllers {
                 log.error("Retrying for the IFSC Code Details. Please stay with us...");
                 throw new IFSCCodeTestException("IFSC Code Details Status code mismatched!");
             }
-            return RestResource.getInstance().deserialize(ifscCodeResponse, IfscCodeDetailsResponse.class);
+            return ApiConstants.REST_RESOURCE.deserialize(ifscCodeResponse, IfscCodeDetailsResponse.class);
+        });
+    }
+
+    public GetAllProductListResponse getAllProductListResponse() {
+        return Failsafe.with(new RetryUtils().getRetryPolicyForAutomationExerciseException(2, 3)).get(() -> {
+            Response productsListResponse = API_CLIENTS.getAllProductsListResponse();
+            if (productsListResponse.statusCode() != HttpStatuses.OK.getCode()) {
+                log.error("Retrying for the Get All Products List. Please stay with us...");
+                throw new AutomationExerciseException("Get All Products List status code mismatched!");
+            }
+            return ApiConstants.REST_RESOURCE.deserialize(productsListResponse, GetAllProductListResponse.class);
         });
     }
 }
