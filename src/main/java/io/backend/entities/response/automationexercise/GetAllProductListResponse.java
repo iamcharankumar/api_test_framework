@@ -1,37 +1,21 @@
 package io.backend.entities.response.automationexercise;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
 
 import java.util.List;
 
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetAllProductListResponse {
-
-    private int responseCode;
-    private List<Products> products;
-
-    @Getter
+public record GetAllProductListResponse(int responseCode, List<Products> products) {
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Products {
-        private Integer id;
-        private String name;
-        private String price;
-        private String brand;
-        private Category category;
+    public static record Products(Integer id, String name, String price, String brand, Category category) {
 
-        @Getter
         @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Category {
+        public static record Category(String category, Usertype usertype) {
 
-            private String category;
-            private Usertype usertype;
-
-            @Getter
             @JsonIgnoreProperties(ignoreUnknown = true)
-            public static class Usertype {
-                private String usertype;
+            public static record Usertype(String usertype) {
+
             }
         }
     }

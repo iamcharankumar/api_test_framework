@@ -1,37 +1,20 @@
 package io.backend.entities.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
 
 import java.util.List;
 
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RickAndMortyResponse {
-    private int id;
-    private String name;
-    private String status;
-    private String type;
-    private String gender;
-    private Origin origin;
-    private Location location;
-
-    @Getter
+public record RickAndMortyResponse(int id, String name, String status, String type, String gender, Origin origin,
+                                   Location location, String image, List<String> episode, String url, String created) {
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Origin {
-        private String name;
-        private String url;
+    public static record Origin(String name, String url) {
+
     }
 
-    @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class Location {
-        String name;
-        String url;
-    }
+    private static record Location(String name, String url) {
 
-    private String image;
-    private List<String> episode;
-    private String url;
-    private String created;
+    }
 }

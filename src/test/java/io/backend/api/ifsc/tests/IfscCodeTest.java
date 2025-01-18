@@ -13,7 +13,7 @@ public class IfscCodeTest extends BaseTest {
     @Test(description = "To verify, the ifsc code details.", dataProvider = "ifsc-code", dataProviderClass = ApiDataProvider.class,
             groups = {TestGroups.IFSC_SMOKE, TestGroups.IFSC_REGRESSION, TestGroups.ALL_SMOKE, TestGroups.ALL_REGRESSION})
     public void testIfscCodeDetails(IfscCodeDetailsResponse ifscCodeDetailsResponse, String ifscCode) {
-        Assert.assertEquals(ifscCodeDetailsResponse.getIfsc(), ifscCode, "IFSC Code Mismatched!");
+        Assert.assertEquals(ifscCodeDetailsResponse.ifsc(), ifscCode, "IFSC Code Mismatched!");
         log.info("Verified the IFSC Code Details for the given IFSC Code {}", ifscCode);
     }
 }

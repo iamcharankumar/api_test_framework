@@ -21,32 +21,32 @@ public class GetAllProductsListTest extends BaseTest {
     public void testGetAllProductsList(GetAllProductListResponse productListResponse, int expectedId, String expectedName,
                                        String expectedPrice, String expectedBrand, String expectedUserType, String expectedCategory) {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(productListResponse.getResponseCode(), HttpStatuses.OK.getCode(), "Get All Products List Response Code Mismatched!");
-        List<GetAllProductListResponse.Products> productsList = productListResponse.getProducts();
+        softAssert.assertEquals(productListResponse.responseCode(), HttpStatuses.OK.getCode(), "Get All Products List Response Code Mismatched!");
+        List<GetAllProductListResponse.Products> productsList = productListResponse.products();
         int actualId = productsList.stream().filter(Objects::nonNull)
-                .filter(id -> id.getId().equals(expectedId)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product ID!")).getId();
+                .filter(id -> id.id().equals(expectedId)).findFirst()
+                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product ID!")).id();
         softAssert.assertEquals(actualId, expectedId, "Get All Products List ID Mismatched!");
         String actualName = productsList.stream().filter(Objects::nonNull)
-                .filter(name -> name.getName().equals(expectedName)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Name!")).getName();
+                .filter(name -> name.name().equals(expectedName)).findFirst()
+                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Name!")).name();
         softAssert.assertEquals(actualName, expectedName, "Get All Products List Name Mismatched!");
         String actualPrice = productsList.stream().filter(Objects::nonNull)
-                .filter(price -> price.getPrice().equals(expectedPrice)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Price!")).getPrice();
+                .filter(price -> price.price().equals(expectedPrice)).findFirst()
+                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Price!")).price();
         softAssert.assertEquals(actualPrice, expectedPrice, "Get All Products List Price Mismatched!");
         String actualBrand = productsList.stream().filter(Objects::nonNull)
-                .filter(brand -> brand.getBrand().equals(expectedBrand)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: ")).getBrand();
+                .filter(brand -> brand.brand().equals(expectedBrand)).findFirst()
+                .orElseThrow(() -> new AutomationExerciseException("Test Data: ")).brand();
         softAssert.assertEquals(actualBrand, expectedBrand, "Get All Products List Brand Mismatched!");
         String actualCategory = productsList.stream().filter(Objects::nonNull)
-                .filter(category -> category.getCategory().getCategory().equals(expectedCategory)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Category!")).getCategory().getCategory();
+                .filter(category -> category.category().category().equals(expectedCategory)).findFirst()
+                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Category!")).category().category();
         softAssert.assertEquals(actualCategory, expectedCategory, "Get All Products List Category Mismatched!");
         String actualUserType = productsList.stream().filter(Objects::nonNull)
-                .filter(userType -> userType.getCategory().getUsertype().getUsertype().equals(expectedUserType))
+                .filter(userType -> userType.category().usertype().usertype().equals(expectedUserType))
                 .findFirst().orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid user type!"))
-                .getCategory().getUsertype().getUsertype();
+                .category().usertype().usertype();
         softAssert.assertEquals(actualUserType, expectedUserType, "Get All Products List User Type Mismatched!");
         softAssert.assertAll();
         log.info("Verified the Product Details: {}, {}, {}, {}, {}, {}", actualId, actualName, actualPrice, actualBrand, actualCategory, actualUserType);

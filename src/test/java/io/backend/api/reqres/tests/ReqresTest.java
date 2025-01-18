@@ -16,9 +16,9 @@ public class ReqresTest extends BaseTest {
             TestGroups.ALL_SMOKE, TestGroups.ALL_REGRESSION})
     public void testUserDetails(CreateUserResponse createUserResponse) {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertFalse(createUserResponse.getId().isEmpty(), "Create User ID is empty!");
-        softAssert.assertFalse(createUserResponse.getCreatedAt().isEmpty(), "Create User date is empty!");
+        softAssert.assertFalse(createUserResponse.id().isEmpty(), "Create User ID is empty!");
+        softAssert.assertFalse(createUserResponse.createdAt().isEmpty(), "Create User date is empty!");
         softAssert.assertAll();
-        log.info("Verified the Create User API with id {}", createUserResponse.getId());
+        log.info("Verified the Create User API with id {}", createUserResponse.id());
     }
 }
