@@ -17,10 +17,10 @@ public class PostalCodeTest extends BaseTest {
             TestGroups.ALL_SMOKE, TestGroups.ALL_REGRESSION})
     public void testPostalCodeDetails(PostalCodeDetailsResponse postalCodeDetailsResponse, String country, String pinCode, String fullCountryName) {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(postalCodeDetailsResponse.getCountry(), fullCountryName, "Postal Code Country Mismatched!");
-        softAssert.assertEquals(postalCodeDetailsResponse.getPostCode(), pinCode, "Post Code pin code Mismatched!");
+        softAssert.assertEquals(postalCodeDetailsResponse.country(), fullCountryName, "Postal Code Country Mismatched!");
+        softAssert.assertEquals(postalCodeDetailsResponse.postCode(), pinCode, "Post Code pin code Mismatched!");
         softAssert.assertAll();
         log.info("Verified the Postal Code details with country {} and pin code {}",
-                postalCodeDetailsResponse.getCountry(), postalCodeDetailsResponse.getPostCode());
+                postalCodeDetailsResponse.country(), postalCodeDetailsResponse.postCode());
     }
 }

@@ -16,10 +16,10 @@ public class RickAndMortyCharacterTest extends BaseTest {
     public void testRickAndMortyCharacters(RickAndMortyResponse rickAndMortyResponse, int characterId,
                                            String characterName, String characterStatus, String characterOrigin) {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(rickAndMortyResponse.getId(), characterId, "Rick And Morty Character Id Failed!");
-        softAssert.assertEquals(rickAndMortyResponse.getName(), characterName, "Rick And Morty Character Name Failed!");
-        softAssert.assertEquals(rickAndMortyResponse.getStatus(), characterStatus, "Rick And Morty Character Status Failed!");
-        softAssert.assertEquals(rickAndMortyResponse.getOrigin().getName(), characterOrigin, "Rick And Morty Character Origin Failed!");
+        softAssert.assertEquals(rickAndMortyResponse.id(), characterId, "Rick And Morty Character Id Failed!");
+        softAssert.assertEquals(rickAndMortyResponse.name(), characterName, "Rick And Morty Character Name Failed!");
+        softAssert.assertEquals(rickAndMortyResponse.status(), characterStatus, "Rick And Morty Character Status Failed!");
+        softAssert.assertEquals(rickAndMortyResponse.origin().name(), characterOrigin, "Rick And Morty Character Origin Failed!");
         softAssert.assertAll();
         log.info("Verified the Character ID {}, Character Name {} and Character Status {}", characterId, characterName, characterStatus);
     }
