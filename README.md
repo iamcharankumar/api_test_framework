@@ -70,3 +70,7 @@ To override the thread values use `-DthreadPoolSize=3 -Ddataproviderthreadcount=
 **Note:** 
 
 - To run specific test cases, use appropriate Test groups present in the 'TestGroups' class.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=iamcharankumar/api_test_framework&type=Date)](https://star-history.com/#iamcharankumar/api_test_framework&Date)
