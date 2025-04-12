@@ -5,7 +5,7 @@ import io.backend.api.constants.TestGroups;
 import io.backend.api.testdata.ApiDataProvider;
 import io.backend.commons.HttpStatuses;
 import io.backend.entities.response.automationexercise.GetAllProductListResponse;
-import io.backend.exceptions.AutomationExerciseException;
+import io.backend.exceptions.ApiTestException;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -25,27 +25,27 @@ public class GetAllProductsListTest extends BaseTest {
         List<GetAllProductListResponse.Products> productsList = productListResponse.products();
         int actualId = productsList.stream().filter(Objects::nonNull)
                 .filter(id -> id.id().equals(expectedId)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product ID!")).id();
+                .orElseThrow(() -> new ApiTestException("Test Data: Invalid Product ID!")).id();
         softAssert.assertEquals(actualId, expectedId, "Get All Products List ID Mismatched!");
         String actualName = productsList.stream().filter(Objects::nonNull)
                 .filter(name -> name.name().equals(expectedName)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Name!")).name();
+                .orElseThrow(() -> new ApiTestException("Test Data: Invalid Product Name!")).name();
         softAssert.assertEquals(actualName, expectedName, "Get All Products List Name Mismatched!");
         String actualPrice = productsList.stream().filter(Objects::nonNull)
                 .filter(price -> price.price().equals(expectedPrice)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Price!")).price();
+                .orElseThrow(() -> new ApiTestException("Test Data: Invalid Product Price!")).price();
         softAssert.assertEquals(actualPrice, expectedPrice, "Get All Products List Price Mismatched!");
         String actualBrand = productsList.stream().filter(Objects::nonNull)
                 .filter(brand -> brand.brand().equals(expectedBrand)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: ")).brand();
+                .orElseThrow(() -> new ApiTestException("Test Data: ")).brand();
         softAssert.assertEquals(actualBrand, expectedBrand, "Get All Products List Brand Mismatched!");
         String actualCategory = productsList.stream().filter(Objects::nonNull)
                 .filter(category -> category.category().category().equals(expectedCategory)).findFirst()
-                .orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid Product Category!")).category().category();
+                .orElseThrow(() -> new ApiTestException("Test Data: Invalid Product Category!")).category().category();
         softAssert.assertEquals(actualCategory, expectedCategory, "Get All Products List Category Mismatched!");
         String actualUserType = productsList.stream().filter(Objects::nonNull)
                 .filter(userType -> userType.category().usertype().usertype().equals(expectedUserType))
-                .findFirst().orElseThrow(() -> new AutomationExerciseException("Test Data: Invalid user type!"))
+                .findFirst().orElseThrow(() -> new ApiTestException("Test Data: Invalid user type!"))
                 .category().usertype().usertype();
         softAssert.assertEquals(actualUserType, expectedUserType, "Get All Products List User Type Mismatched!");
         softAssert.assertAll();
