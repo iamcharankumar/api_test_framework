@@ -7,10 +7,9 @@ public class ConfigLoader {
 
     private final Properties PROPERTIES;
     private static ConfigLoader instance;
-    private static final String API_PROPERTY_FILE = "./src/main/java/resource/api.properties";
 
     private ConfigLoader() {
-        PROPERTIES = PropertiesHelper.loadProperties(API_PROPERTY_FILE);
+        PROPERTIES = PropertiesHelper.loadProperties("./src/main/java/resource/api.properties");
     }
 
     public static ConfigLoader getInstance() {
