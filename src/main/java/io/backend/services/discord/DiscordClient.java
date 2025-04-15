@@ -1,6 +1,6 @@
 package io.backend.services.discord;
 
-import io.backend.commons.RestResource;
+import io.backend.constants.ApiConstants;
 import io.backend.constants.ApiRoutes;
 import io.backend.entities.request.discord.SendMessageRequest;
 import io.backend.exceptions.DiscordException;
@@ -16,8 +16,8 @@ public class DiscordClient {
     @SneakyThrows
     public Response getSendMessageResponse(SendMessageRequest sendMessageRequest) {
         String discordWebHookEndPoint = ApiRoutes.DISCORD_WEBHOOK + WEBHOOK_TOKEN;
-        String discordMessage = RestResource.getInstance().serialize(sendMessageRequest);
-        Response sendMessageResponse = RestResource.getInstance().postApiResponse(discordMessage, discordWebHookEndPoint);
+        String discordMessage = ApiConstants.REST_RESOURCE.serialize(sendMessageRequest);
+        Response sendMessageResponse = ApiConstants.REST_RESOURCE.postApiResponse(discordMessage, discordWebHookEndPoint);
         if (sendMessageResponse != null)
             return sendMessageResponse;
         else

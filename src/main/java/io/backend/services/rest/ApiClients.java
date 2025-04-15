@@ -1,6 +1,5 @@
 package io.backend.services.rest;
 
-import io.backend.commons.RestResource;
 import io.backend.constants.ApiConstants;
 import io.backend.constants.ApiRoutes;
 import io.backend.entities.request.CreateUsersRequest;
@@ -14,7 +13,7 @@ import java.util.Objects;
 public class ApiClients {
     public Response getPostalCodeResponse(String country, String pinCode) {
         String postalCodeEndPoint = ApiRoutes.GET_POSTAL_CODE_INFO + country + "/" + pinCode;
-        Response postalCodeResponse = RestResource.getInstance().getApiResponse(postalCodeEndPoint);
+        Response postalCodeResponse = ApiConstants.REST_RESOURCE.getApiResponse(postalCodeEndPoint);
         Objects.requireNonNull(postalCodeResponse, "Client Exception: Zippost Postal Code API");
         return postalCodeResponse;
     }
@@ -22,22 +21,22 @@ public class ApiClients {
     @SneakyThrows
     public Response createUserResponse(String name, String job) {
         CreateUsersRequest createUsersRequest = new CreateUsersRequest(name, job);
-        String request = RestResource.getInstance().serialize(createUsersRequest);
-        Response createResponse = RestResource.getInstance().postApiResponse(request, ApiRoutes.POST_CREATE_USER);
+        String request = ApiConstants.REST_RESOURCE.serialize(createUsersRequest);
+        Response createResponse = ApiConstants.REST_RESOURCE.postApiResponse(request, ApiRoutes.POST_CREATE_USER);
         Objects.requireNonNull(createResponse, "Client Exception: Reqres Create User API");
         return createResponse;
     }
 
     public Response getRickAndMortyCharacterResponse(int characterId) {
         String rickAndMortyCharacterEndPoint = ApiRoutes.GET_RICK_AND_MORTY_CHARACTER + characterId;
-        Response rickAndMortyCharacterResponse = RestResource.getInstance().getApiResponse(rickAndMortyCharacterEndPoint);
+        Response rickAndMortyCharacterResponse = ApiConstants.REST_RESOURCE.getApiResponse(rickAndMortyCharacterEndPoint);
         Objects.requireNonNull(rickAndMortyCharacterResponse, "Client Exception: Rick And Morty Character Details API");
         return rickAndMortyCharacterResponse;
     }
 
     public Response getIfscCodeDetailsResponse(String ifscCode) {
         String ifscCodeDetailsEndPoint = ApiRoutes.IFSC_CODE_DETAILS + ifscCode;
-        Response ifscCodeDetailsResponse = RestResource.getInstance().getApiResponse(ifscCodeDetailsEndPoint);
+        Response ifscCodeDetailsResponse = ApiConstants.REST_RESOURCE.getApiResponse(ifscCodeDetailsEndPoint);
         Objects.requireNonNull(ifscCodeDetailsResponse, "Client Exception: IFSC Code Details API");
         return ifscCodeDetailsResponse;
     }
