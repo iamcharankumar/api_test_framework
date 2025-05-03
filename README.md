@@ -86,6 +86,8 @@ To override the thread values use `-DthreadPoolSize=3 -Ddataproviderthreadcount=
   brilliant [work](https://github.com/fabriciorby/maven-surefire-junit5-tree-reporter?tab=readme-ov-file)!
   ❤️
 
+<img width="1724" alt="API_Logs" src="https://github.com/user-attachments/assets/acde60f6-4bca-4948-9819-bb4133bab34b" />
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=iamcharankumar/api_test_framework&type=Date)](https://star-history.com/#iamcharankumar/api_test_framework&Date)
