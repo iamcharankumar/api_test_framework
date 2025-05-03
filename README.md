@@ -71,6 +71,21 @@ To override the thread values use `-DthreadPoolSize=3 -Ddataproviderthreadcount=
 
 - To run specific test cases, use appropriate Test groups present in the 'TestGroups' class.
 
+#### DECLUTTERING MAVEN OUTPUT
+
+- Maven usually floods the console with logs during test execution, making it hard to spot what's important.
+  A clean, minimal, Node.js-style output for a Java project felt impossible—until I
+  found this [maven dependency](https://mvnrepository.com/artifact/me.fabriciorby/maven-surefire-junit5-tree-reporter).
+- Its purpose is simple: **"What happened to my test cases?"** That’s exactly what it shows—straight to the point, no
+  clutter.
+- By following this [post](https://medium.com/wearewaes/my-journey-to-a-clear-test-output-in-maven-df82fe272249)
+  by [Fabricio](https://github.com/fabriciorby),
+  I was able to configure it easily and get the clean output shown below.
+- The output works locally and in GitHub Actions as well.
+- Huge respect and thanks to the author for this
+  brilliant [work](https://github.com/fabriciorby/maven-surefire-junit5-tree-reporter?tab=readme-ov-file)!
+  ❤️
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=iamcharankumar/api_test_framework&type=Date)](https://star-history.com/#iamcharankumar/api_test_framework&Date)
